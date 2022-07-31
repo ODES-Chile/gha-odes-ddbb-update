@@ -3,6 +3,8 @@ on:
     branches: [main, master]
   pull_request:
     branches: [main, master]
+  schedule:
+  - cron: 0 5 * * *
 
 name: updatedb
 
@@ -39,3 +41,11 @@ jobs:
         shell: Rscript {0}
         run: |
           source("R/updatedb.R", echo = TRUE)
+
+      - name: Commit files
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add --all
+          git commit -am "updating data and report" --author 'Joshua Kunst <jbkunst@gmail.com>'
+          git push
