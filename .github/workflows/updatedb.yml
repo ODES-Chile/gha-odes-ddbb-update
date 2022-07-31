@@ -25,6 +25,16 @@ jobs:
         run: |
           remotes::install_github("ODES-Chile/agrometR")
 
+      - name: Create and populate .Renviron file
+        run: |
+          echo SHINY_PSQL_PWD="MAPPED_SHINY_PSQL_PWD" >> ~/.Renviron
+          echo HOST="MAPPED_HOST " >> ~/.Renviron
+
+        shell: bash
+        env:
+          MAPPED_SHINY_PSQL_PWD: ${{ secrets.SHINY_PSQL_PWD }}
+          MAPPED_HOST : ${{ secrets.HOST }}
+
       - name: Update DB
         shell: Rscript {0}
         run: |
