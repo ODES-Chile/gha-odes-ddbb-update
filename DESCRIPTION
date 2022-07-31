@@ -1,0 +1,19 @@
+Package: updatedb
+Title: Update ODES DB
+Description: The job.
+Version: 0.0.0.9000
+Authors@R:
+    person(given = "Joshua", family = "Kunst", role = c("aut", "cre"), email = "jbkunst@gmail.com")
+Encoding: UTF-8
+Imports:
+  dplyr,
+  dbplyr,
+  stringr,
+  lubridate,
+  here,
+  rmarkdown,
+  ggplot2,
+  RPostgres
+Remotes: 
+  github::ODES-Chile/agrometR
+Depends: R (>= 3.5.0)

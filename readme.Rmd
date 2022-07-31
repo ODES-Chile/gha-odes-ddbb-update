@@ -1,0 +1,79 @@
+---
+output:
+  github_document:
+editor_options: 
+  chunk_output_type: console
+---
+
+# Update ODES DB
+
+## Summary
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  fig.path = "figures/"
+)
+```
+
+Rendering on `r Sys.time()`.
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+
+con <- RPostgres::dbConnect(
+  RPostgres::Postgres(),
+  host =  Sys.getenv("HOST"),
+  user = "shiny",
+  password = Sys.getenv("SHINY_PSQL_PWD"),
+  dbname = "shiny"
+)
+
+plot_data <- function(data){
+  
+  ggplot(data) +
+    geom_line(aes(fecha_hora, n), group = 1, size = 1.1, color = "gray60") +
+    scale_x_date(
+      limits = c(lubridate::ymd(20100101), NA),
+      minor_breaks = "year", position = "top"
+      ) +
+    scale_y_continuous(
+      limits = c(0, NA),
+      labels = scales::comma, position = "right"
+      ) +
+    theme_minimal() +
+    labs(x = NULL, y = NULL)
+  
+}
+
+data <- tbl(con, "estaciones_datos") |> 
+  count(fecha_hora) |> 
+  collect() |> 
+  mutate(n = as.integer(n))
+
+plot_data(data)
+
+data_month <- data |> 
+  mutate(fecha_hora = floor_date(fecha_hora, "month")) |> 
+  count(fecha_hora, wt = n)
+
+plot_data(data_month)
+
+data_year <- data |> 
+  mutate(fecha_hora = floor_date(fecha_hora, "year")) |> 
+  count(fecha_hora, wt = n)
+
+plot_data(data_year)
+```
+
+```{r, results='asis'}
+data_year |> 
+  mutate(n = scales::comma(n)) |> 
+  arrange(desc(fecha_hora)) |> 
+  knitr::kable(align = "lr")
+```
+
