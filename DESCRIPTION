@@ -13,7 +13,8 @@ Imports:
   here,
   rmarkdown,
   ggplot2,
-  RPostgres
+  RPostgres,
+  remotes
 Remotes: 
   github::ODES-Chile/agrometR
 Depends: R (>= 3.5.0)
