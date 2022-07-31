@@ -20,6 +20,11 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
 
+      - name: Install agrometR
+        shell: Rscript {0}
+        run: |
+          remotes::install_github("ODES-Chile/agrometR")
+
       - name: Update DB
         shell: Rscript {0}
         run: |
