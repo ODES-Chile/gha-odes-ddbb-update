@@ -3,13 +3,13 @@
 
 ## Summary
 
-Rendering on 2022-07-31 18:39:02.
+Rendering on 2022-08-01 06:34:56.
 
 ![](figures/unnamed-chunk-1-1.png)<!-- -->![](figures/unnamed-chunk-1-2.png)<!-- -->![](figures/unnamed-chunk-1-3.png)<!-- -->
 
 | fecha\_hora |       n |
 | :---------- | ------: |
-| 2022-01-01  | 109,238 |
+| 2022-01-01  | 109,176 |
 | 2021-01-01  | 186,549 |
 | 2020-01-01  | 184,271 |
 | 2019-01-01  | 181,752 |
