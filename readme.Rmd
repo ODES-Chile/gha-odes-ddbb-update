@@ -1,13 +1,11 @@
 ---
 output:
   github_document:
+    toc: true
+    toc_depth: 2
 editor_options: 
   chunk_output_type: console
 ---
-
-# Update ODES DB
-
-## Summary
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
@@ -17,8 +15,6 @@ knitr::opts_chunk$set(
   fig.path = "figures/"
 )
 ```
-
-Rendering on `r Sys.time()`.
 
 ```{r}
 library(dplyr)
@@ -35,14 +31,16 @@ con <- RPostgres::dbConnect(
 
 plot_data <- function(data){
   
-  ggplot(data) +
-    geom_line(aes(fecha_hora, n), group = 1, size = 1.1, color = "gray60") +
+  ggplot(data, aes(fecha_hora, n)) +
+    geom_line(group = 1, size = 1.1, color = "gray60") +
     scale_x_date(
-      limits = c(lubridate::ymd(20100101), NA),
-      minor_breaks = "year", position = "top"
+      date_labels = "%Y",
+      breaks = "year",
+      minor_breaks = "months",
+      position = "top"
       ) +
     scale_y_continuous(
-      limits = c(0, NA),
+      # limits = c(0, NA),
       labels = scales::comma, position = "right"
       ) +
     theme_minimal() +
@@ -55,25 +53,83 @@ data <- tbl(con, "estaciones_datos") |>
   collect() |> 
   mutate(n = as.integer(n))
 
-plot_data(data)
-
 data_month <- data |> 
   mutate(fecha_hora = floor_date(fecha_hora, "month")) |> 
   count(fecha_hora, wt = n)
 
-plot_data(data_month)
-
 data_year <- data |> 
   mutate(fecha_hora = floor_date(fecha_hora, "year")) |> 
   count(fecha_hora, wt = n)
-
-plot_data(data_year)
 ```
 
+# ODES DB
+
+--- 
+
+## Daily summary
+
+```{r}
+data |> 
+  filter(year(fecha_hora) >= 2021) |> 
+  plot_data()
+```
+
+Count of last 2 week:
+
 ```{r, results='asis'}
-data_year |> 
+data |> 
+  arrange(fecha_hora) |> 
+  tail(14) |> 
   mutate(n = scales::comma(n)) |> 
   arrange(desc(fecha_hora)) |> 
   knitr::kable(align = "lr")
 ```
 
+## Monthly summary
+
+```{r}
+data_month |> 
+  filter(year(fecha_hora) >= 2021) |> 
+  plot_data() 
+```
+
+Count of last 12 months:
+
+```{r, results='asis'}
+data_month |> 
+  arrange(fecha_hora) |> 
+  tail(12) |> 
+  mutate(n = scales::comma(n)) |> 
+  arrange(desc(fecha_hora)) |> 
+  knitr::kable(align = "lr")
+```
+
+## Yearly summary
+
+```{r}
+data_year |> 
+  # filter(year(fecha_hora) >= 2010) |> 
+  plot_data() +
+  scale_x_date(
+    date_labels = "%Y",
+    breaks = "year",
+    minor_breaks = NULL,
+    position = "top",
+    sec.axis = dup_axis()
+    ) + 
+  scale_y_continuous(
+    labels = scales::comma, position = "right",
+    sec.axis = dup_axis()
+    ) 
+```
+
+Count of last 10 years:
+
+```{r, results='asis'}
+data_year |> 
+  arrange(fecha_hora) |> 
+  tail(10) |> 
+  mutate(n = scales::comma(n)) |> 
+  arrange(desc(fecha_hora)) |> 
+  knitr::kable(align = "lr")
+```
