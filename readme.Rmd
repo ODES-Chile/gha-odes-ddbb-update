@@ -64,6 +64,8 @@ data_year <- data |>
 
 # ODES DB
 
+Updated on `r Sys.time()`
+
 --- 
 
 ## Daily summary
