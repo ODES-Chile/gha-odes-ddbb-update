@@ -46,5 +46,5 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           git add --all
-          git commit -am "updating data and report" --author 'Joshua Kunst <jbkunst@gmail.com>'
+          git commit -am "updating readme.md" --author 'Joshua Kunst <jbkunst@gmail.com>'
           git push
