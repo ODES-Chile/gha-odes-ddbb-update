@@ -13,7 +13,7 @@ cli_h1("Date parameters")
 
 date <- Sys.Date()
 # delete this!
-date <- date - days(3)
+# date <- date - days(3)
 
 date_start <- date |>
   lubridate::floor_date(unit = "month") |>
@@ -36,7 +36,14 @@ data_ran <- agrometR::get_agro_data(
   verbose = TRUE
 )
 
-glimpse(data_ran)
+idx <- data_ran |>
+  select(-station_id, -fecha_hora) |>
+  complete.cases()
+
+# important!
+data_ran <- filter(data_ran, if_any(c(-station_id, -fecha_hora), purrr::negate(is.na)))
+
+data_ran |> summarise(min(fecha_hora), max(fecha_hora))
 
 data_ran_daily <- agrometR:::daily_aggregation_ran(data_ran)
 
@@ -124,7 +131,6 @@ DBI::dbSendQuery(con, query_delete_rows)
 tbl(con, "estaciones_datos") |>
   filter(year(fecha_hora) == y, month(fecha_hora) == m) |>
   count()
-
 
 # DDBB Upload rows --------------------------------------------------------
 DBI::dbWriteTable(
