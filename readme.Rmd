@@ -12,7 +12,8 @@ knitr::opts_chunk$set(
   echo = FALSE,
   message = FALSE,
   warning = FALSE,
-  fig.path = "figures/"
+  fig.path = "figures/",
+  dev = "svg"
 )
 ```
 
