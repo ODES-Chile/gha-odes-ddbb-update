@@ -1,13 +1,13 @@
 
 # ODES DB
 
-Updated on: 2022-09-05 00:46:06
+Updated on: 2022-09-05 03:50:56
 
 -----
 
 ## Daily summary
 
-![](figures/unnamed-chunk-2-1.png)<!-- -->
+![](figures/unnamed-chunk-2-1.svg)<!-- -->
 
 Count of last 2 week:
 
@@ -30,7 +30,7 @@ Count of last 2 week:
 
 ## Monthly summary
 
-![](figures/unnamed-chunk-4-1.png)<!-- -->
+![](figures/unnamed-chunk-4-1.svg)<!-- -->
 
 Count of last 12 months:
 
@@ -51,7 +51,7 @@ Count of last 12 months:
 
 ## Yearly summary
 
-![](figures/unnamed-chunk-6-1.png)<!-- -->
+![](figures/unnamed-chunk-6-1.svg)<!-- -->
 
 Count of last 10 years:
 
