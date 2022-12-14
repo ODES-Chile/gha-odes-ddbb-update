@@ -99,7 +99,7 @@ cli_h1("DDBB Delete rows")
 
 con <- RPostgres::dbConnect(
   RPostgres::Postgres(),
-  host =  Sys.getenv("HOST"),
+  host = Sys.getenv("HOST"),
   user = "shiny",
   password = Sys.getenv("SHINY_PSQL_PWD"),
   dbname = "shiny"
