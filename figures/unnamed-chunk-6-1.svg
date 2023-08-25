@@ -135,7 +135,7 @@
 <g clip-path="url(#clip16)" clip-rule="nonzero">
 <path style="fill:none;stroke-width:1.066978;stroke-linecap:butt;stroke-linejoin:round;stroke:rgb(92.156863%,92.156863%,92.156863%);stroke-opacity:1;stroke-miterlimit:10;" d="M 442.535156 340.589844 L 442.535156 19.410156 "/>
 </g>
-<path style="fill:none;stroke-width:2.347352;stroke-linecap:butt;stroke-linejoin:round;stroke:rgb(60%,60%,60%);stroke-opacity:1;stroke-miterlimit:10;" d="M 61.464844 325.988281 L 109.066406 220.382812 L 156.796875 154.121094 L 204.398438 86.316406 L 252 50.757812 L 299.601562 40.730469 L 347.332031 34.011719 L 394.933594 36.457031 L 442.535156 289.953125 "/>
+<path style="fill:none;stroke-width:2.347352;stroke-linecap:butt;stroke-linejoin:round;stroke:rgb(60%,60%,60%);stroke-opacity:1;stroke-miterlimit:10;" d="M 61.464844 325.988281 L 109.066406 220.382812 L 156.796875 154.121094 L 204.398438 86.316406 L 252 50.757812 L 299.601562 40.730469 L 347.332031 34.011719 L 394.933594 36.457031 L 442.535156 289.402344 "/>
 <g style="fill:rgb(30.196078%,30.196078%,30.196078%);fill-opacity:1;">
   <use xlink:href="#glyph0-1" x="51.464844" y="13.895508"/>
   <use xlink:href="#glyph0-2" x="56.464844" y="13.895508"/>
