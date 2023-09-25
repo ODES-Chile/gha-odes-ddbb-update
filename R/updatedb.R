@@ -54,6 +54,12 @@ cli_h1("DMC")
 
 cli_h2("downloading")
 
+# fix de 4 horas
+cli_alert_info("fix de 4 horas")
+
+date_start <- date_start + hours(4)
+date_end   <- (date_start + months(1) - seconds(1))
+
 data_dmc <- agrometR::get_agro_data_dmc(
   agrometR::estaciones_dmc[["codigoNacional"]],
   date_start = date_start,
